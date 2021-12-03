@@ -8,12 +8,12 @@ const apiUrl = `https://api.lyrics.ovh/`
 
 /*requisição das letras das músicas*/
 
-const fetchSongs = term => {
-    fetch(`${apiUrl}/suggest/${term}`)
-    .then(response => response.json())
-    .then(data => {
+const fetchSongs = async term => {
+    const response = await fetch(`${apiUrl}/suggest/${term}`)
+    const data = await response.json()
+    
         console.log(data)
-    })
+
 
 }
 
