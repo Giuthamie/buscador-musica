@@ -1,0 +1,33 @@
+{
+  "name": "buscador-musica",
+  "version": "1.0.0",
+  "description": "Projeto com finalidade de aprimorar conhecimentos em JS puro",
+  "main": "index.js",
+  "scripts": {
+    "htmlhint": "htmlhint src/*.html test/*.html",
+    "eslint": "eslint --ext .js src/ test/",
+    "pretest": "npm run eslint && npm run htmlhint",
+    "test": "jest --verbose --coverage",
+    "open-coverage-report": "opener ./coverage/lcov-report/index.html",
+    "start": "serve ./src",
+    "deploy": "gh-pages -d src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Giuthamie/buscador-musica.git"
+  },
+  "keywords": [
+    "buscador"
+  ],
+  "author": "Giuliana Thamie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Giuthamie/buscador-musica/issues"
+  },
+  "homepage": "https://github.com/Giuthamie/buscador-musica#readme",
+  "devDependencies": {
+    "add": "^2.0.6",
+    "eslint": "^8.3.0",
+    "jest": "^27.4.3"
+  }
+}
