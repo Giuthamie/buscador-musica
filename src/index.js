@@ -60,11 +60,13 @@ form.addEventListener('submit', event => {
 const fetchLyrics = async (artist, songTitle) => {
     const response = await fetch(`${apiUrl}/v1/${artist}/${songTitle}`)
     const data = await response.json()
+    const lyrics = data.lyrics.replace(/(\r\n|\r|\n)/g, '<br>')
+
 
     songsContainer.innerHTML = `
-    <li class="lyrisc-container">
+    <li class="lyrics-container">
     <h2><strong>${songTitle}</strong> - ${artist}</h2>
-    <p class="lyrics">${data.lyrics}</p>
+    <p class="lyrics">${lyrics}</p>
     </li>
     `
 }
@@ -77,6 +79,8 @@ const clickedElement = event.target
     if(clickedElement.tagName === 'BUTTON'){
     const artist = clickedElement.getAttribute('data-artist')    
     const songTitle = clickedElement.getAttribute('data-song-title') 
+
+    prevAndNextContainer.innerHTML = ''
 
     fetchLyrics(artist, songTitle)
 }
