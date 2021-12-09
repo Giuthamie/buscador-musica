@@ -6,6 +6,8 @@ const prevAndNextContainer = document.querySelector('#prev-and-next-container');
 /* armazenando a url da api*/
 const apiUrl = `https://api.lyrics.ovh/`
 
+/*inserindo mais musicas na tela*/
+
 const getMoreSongs = async url => {
     const response = await fetch(`https://cors-anywhere.herokuapp.com/${url}`)
     const data = await response.json()
@@ -53,3 +55,29 @@ form.addEventListener('submit', event => {
 
     fetchSongs(searchTerm)
 })
+
+
+const fetchLyrics = async (artist, songTitle) => {
+    const response = await fetch(`${apiUrl}/v1/${artist}/${songTitle}`)
+    const data = await response.json()
+
+    songsContainer.innerHTML = `
+    <li class="lyrisc-container">
+    <h2><strong>${songTitle}</strong> - ${artist}</h2>
+    <p class="lyrics">${data.lyrics}</p>
+    </li>
+    `
+}
+
+
+/* funcionalidade do botão de ver letras de musicas*/
+
+songsContainer.addEventListener('click', event => {
+const clickedElement = event.target
+    if(clickedElement.tagName === 'BUTTON'){
+    const artist = clickedElement.getAttribute('data-artist')    
+    const songTitle = clickedElement.getAttribute('data-song-title') 
+
+    fetchLyrics(artist, songTitle)
+}
+} )
