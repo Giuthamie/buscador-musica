@@ -58,12 +58,7 @@ form.addEventListener('submit', event => {
     fetchSongs(searchTerm)
 })
 
-
-const fetchLyrics = async (artist, songTitle) => {
-    const data = await fetchData(`${apiUrl}/v1/${artist}/${songTitle}`)
-    const lyrics = data.lyrics.replace(/(\r\n|\r|\n)/g, '<br>')
-
-
+const insertLyricsIntoPage = lyricsInfo => {
     songsContainer.innerHTML = `
     <li class="lyrics-container">
     <h2><strong>${songTitle}</strong> - ${artist}</h2>
@@ -71,6 +66,12 @@ const fetchLyrics = async (artist, songTitle) => {
     </li>
     `
 }
+
+const fetchLyrics = async (artist, songTitle) => {
+    const data = await fetchData(`${apiUrl}/v1/${artist}/${songTitle}`)
+    const lyrics = data.lyrics.replace(/(\r\n|\r|\n)/g, '<br>')
+    insertLyricsIntoPage({lyrics, artist, songTitle}) 
+    }
 
 
 /* funcionalidade do botão de ver letras de musicas*/
