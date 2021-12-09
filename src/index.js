@@ -6,13 +6,17 @@ const prevAndNextContainer = document.querySelector('#prev-and-next-container');
 /* armazenando a url da api*/
 const apiUrl = `https://api.lyrics.ovh/`
 
+const fetchData = async url => {
+    const response = await fetch(url)
+    return await response.json()
+
+}
+
 /*inserindo mais musicas na tela*/
 
 const getMoreSongs = async url => {
-    const response = await fetch(`https://cors-anywhere.herokuapp.com/${url}`)
-    const data = await response.json()
-    
-    insertSongsIntoPage(data)
+        const data = await fetchData(`https://cors-anywhere.herokuapp.com/${url}`)
+        insertSongsIntoPage(data)
 
 }
 
@@ -37,10 +41,8 @@ const insertSongsIntoPage = songsInfo => {
 /*requisição das letras das músicas*/
 
 const fetchSongs = async term => {
-    const response = await fetch(`${apiUrl}/suggest/${term}`)
-    const data = await response.json()
-    
-    insertSongsIntoPage(data)
+     const data = await fetchData(`${apiUrl}/suggest/${term}`)
+     insertSongsIntoPage(data)
 }
 
 form.addEventListener('submit', event => {
@@ -58,8 +60,7 @@ form.addEventListener('submit', event => {
 
 
 const fetchLyrics = async (artist, songTitle) => {
-    const response = await fetch(`${apiUrl}/v1/${artist}/${songTitle}`)
-    const data = await response.json()
+    const data = await fetchData(`${apiUrl}/v1/${artist}/${songTitle}`)
     const lyrics = data.lyrics.replace(/(\r\n|\r|\n)/g, '<br>')
 
 
